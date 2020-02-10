@@ -2,6 +2,7 @@ package fr.nicolasbisson.carWebService.services;
 
 import fr.nicolasbisson.carWebService.models.Car;
 import fr.nicolasbisson.carWebService.models.Dates;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +36,15 @@ public class CarService {
 
     @RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Car getCar(@PathVariable(value = "plateNumber") String plateNumber){
-        for(Car car: cars){
-            if(car.getPlateNumber().equals(plateNumber)){
-                return car;
-            }
-        }
-        return null;
+    public ResponseEntity<Car> getCar(@PathVariable(value = "plateNumber") String plateNumber){
+
+         Car car = cars.stream().filter(cars -> cars.getPlateNumber().equals(plateNumber)).findFirst().orElse(null);
+
+         if (car != null) {
+             return new ResponseEntity<>(car, HttpStatus.OK);
+         }
+
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.PUT)
