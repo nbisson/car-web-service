@@ -1,9 +1,13 @@
 package fr.nicolasbisson.carWebService.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Car {
 
+    @Id
     private String plateNumber;
     private String brand;
     private int price;
@@ -14,7 +18,6 @@ public class Car {
     }
 
     public Car(String plateNumber, String brand, int price) {
-        super();
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.price = price;
