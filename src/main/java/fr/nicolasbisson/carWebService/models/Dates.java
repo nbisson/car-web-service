@@ -1,11 +1,19 @@
 package fr.nicolasbisson.carWebService.models;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class Dates {
 
-    private Date begin;
-    private Date end;
+    @org.springframework.data.annotation.Id
+    @javax.persistence.Id
+    private int id;
+    private Date begin = null;
+    private Date end = null;
+
+    public Dates() {
+    }
 
     public Dates(Date begin, Date end) {
         this.begin = begin;

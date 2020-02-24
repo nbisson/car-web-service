@@ -1,16 +1,21 @@
 package fr.nicolasbisson.carWebService.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+//@Document
+@Entity
 public class Car {
 
-    @Id
+//    @org.springframework.data.annotation.Id
+    @javax.persistence.Id
     private String plateNumber;
     private String brand;
     private int price;
+    @OneToOne
     private Dates dates = null;
 
     public Car() {
