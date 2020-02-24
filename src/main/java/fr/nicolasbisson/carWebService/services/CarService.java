@@ -1,8 +1,10 @@
 package fr.nicolasbisson.carWebService.services;
 
 import fr.nicolasbisson.carWebService.models.Car;
+import fr.nicolasbisson.carWebService.models.CarSQL;
 import fr.nicolasbisson.carWebService.models.Dates;
 import fr.nicolasbisson.carWebService.repositories.CarRepository;
+import fr.nicolasbisson.carWebService.repositories.CarRepositorySQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class CarService {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private CarRepositorySQL carRepositorySQL;
 
     private List<Car> cars = new ArrayList<Car>();
 
@@ -31,7 +36,13 @@ public class CarService {
     public void addCar(@RequestBody Car car) throws Exception{
         System.out.println(car);
         carRepository.save(car);
-        //cars.add(car);
+    }
+
+    @RequestMapping(value = "/sql/cars", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCar(@RequestBody CarSQL carSQL) throws Exception{
+        System.out.println(carSQL);
+        carRepositorySQL.save(carSQL);
     }
 
     @RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.GET)

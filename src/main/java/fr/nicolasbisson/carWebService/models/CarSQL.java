@@ -1,28 +1,31 @@
 package fr.nicolasbisson.carWebService.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class Car {
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
-    @org.springframework.data.annotation.Id
+@Entity
+public class CarSQL {
+
+    @javax.persistence.Id
     private String plateNumber;
     private String brand;
     private int price;
+    @OneToOne
     private Dates dates = null;
 
-    public Car() {
+    public CarSQL() {
         super();
     }
 
-    public Car(String plateNumber, String brand, int price) {
+    public CarSQL(String plateNumber, String brand, int price) {
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.price = price;
     }
 
-    public Car(String plateNumber, String brand, int price, Dates dates) {
+    public CarSQL(String plateNumber, String brand, int price, Dates dates) {
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.price = price;
